@@ -3,7 +3,9 @@ package pathfinding;
 import pathfinding.util.Point;
 import pathfinding.util.TileState;
 
-public class Maze {
+import java.io.Serializable;
+
+public class Maze implements Serializable{
 
     public MazeTile[][] tileMatrix;
 

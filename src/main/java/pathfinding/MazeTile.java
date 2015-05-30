@@ -2,7 +2,9 @@ package pathfinding;
 
 import pathfinding.util.TileState;
 
-public class MazeTile {
+import java.io.Serializable;
+
+public class MazeTile implements Serializable{
 
     private TileState state;
 
