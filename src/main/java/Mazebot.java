@@ -1,4 +1,3 @@
-import pathfinding.util.Point;
 import ui.MazeBuildView;
 import ui.MazeController;
 import ui.MazeSolveView;
