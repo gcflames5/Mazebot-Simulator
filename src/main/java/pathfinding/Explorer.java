@@ -5,12 +5,9 @@ import pathfinding.util.Point;
 import pathfinding.util.TileState;
 import ui.DebugView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Stack;
+import java.util.*;
 
-    public class Explorer {
+public class Explorer {
 
     public Maze maze, key;
     public Point currentPoint;
@@ -18,6 +15,7 @@ import java.util.Stack;
 
     List<Point> possiblePoints;
     Stack<Point> missedOppertunities;
+    Stack<Direction> missedOppertunitiesDir;
 
     Random rand;
 
@@ -28,7 +26,9 @@ import java.util.Stack;
         this.currentDirection = Direction.UP;
         this.key = mazeKey;
         this.possiblePoints = new ArrayList<Point>();
-        this.missedOppertunities = new Stack();
+        this.missedOppertunities = new Stack<Point>();
+        this.missedOppertunitiesDir = new Stack<Direction>();
+
 
         rand = new Random();
     }
@@ -49,7 +49,7 @@ import java.util.Stack;
     }
 
     private void checkVisibleDirections(){
-        for (Direction d : currentDirection.pseudo()){
+        for (Direction d : Direction.values()){
             Point newPoint = currentPoint.inDirectionOf(d);
             if (newPoint.x < 0 || newPoint.x >= maze.tileMatrix.length
                     || newPoint.y < 0 || newPoint.y >= maze.tileMatrix.length)
@@ -62,9 +62,11 @@ import java.util.Stack;
 
     private boolean move(){
         if (possiblePoints.size() <= 0){
-            if (missedOppertunities.size() <= 0)
+            if (missedOppertunities.size() <= 0){
                 return false;
+            }
             possiblePoints.add(missedOppertunities.pop());
+            currentDirection = missedOppertunitiesDir.pop();
         }
 
         //Choose a new Point to move to and take other possibilities and put them in missedOppertunities
@@ -72,6 +74,7 @@ import java.util.Stack;
         possiblePoints.remove(chosenPoint);
         for (Point p : possiblePoints){
             missedOppertunities.add(p);
+            missedOppertunitiesDir.add(currentDirection);
             maze.setTileState(p, TileState.OPEN_AND_WAITING);
         }
         possiblePoints.clear();

@@ -17,7 +17,7 @@ public class Pathfinder {
     Node currentNode;
     Point endPoint;
 
-    private List<Node> nodes, open, closed, path;
+    private List<Node> nodes, open, closed;
 
     JComboBox delay;
 
@@ -25,7 +25,6 @@ public class Pathfinder {
         DebugView.d("Initializing pathfinder...");
         this.delay = delay;
 
-        path = Collections.synchronizedList(new ArrayList<Node>());
         open = new ArrayList<Node>();
         closed = new ArrayList<Node>();
         nodes = new ArrayList<Node>();

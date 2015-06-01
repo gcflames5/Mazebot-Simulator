@@ -40,7 +40,7 @@ public class MazeSolveView extends JFrame{
             public void run() {
                 while (true){
                     update();
-                    try { Thread.sleep(50); }
+                    try { Thread.sleep(10); }
                     catch (InterruptedException e) { e.printStackTrace(); }
                 }
             }

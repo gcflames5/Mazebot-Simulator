@@ -39,7 +39,7 @@ public class PathfinderThread {
                     e.printStackTrace();
                 }
             }
-            explorer.cleanup();
+            //explorer.cleanup();
             SolveThread sThread = new SolveThread(delayList, solveView, keyMaze, stepTime);
             sThread.thread.start();
         }
