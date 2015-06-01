@@ -4,6 +4,7 @@ import pathfinding.util.Direction;
 import pathfinding.util.Node;
 import pathfinding.util.Point;
 import pathfinding.util.TileState;
+import ui.DebugView;
 import ui.MazeController;
 import ui.MazeSolveView;
 
@@ -21,6 +22,7 @@ public class Pathfinder {
     JComboBox delay;
 
     public Pathfinder(JComboBox delay, Maze mazeToSolve){
+        DebugView.d("Initializing pathfinder...");
         this.delay = delay;
 
         path = Collections.synchronizedList(new ArrayList<Node>());
@@ -74,44 +76,8 @@ public class Pathfinder {
         return possibilities;
     }
 
-    /*public Node find(MazeSolveView view){
-        this.currentNode = pointToNode(nodes, mazeToSolve.getStart());
-        System.out.println(this.endPoint);
-        open.add(currentNode);
-        while(!open.isEmpty()){
-            view.path = makePath(currentNode);
-            try {
-                Thread.sleep(Integer.valueOf(delay.getSelectedItem().toString()));
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            Node node = getClosestToGoal(open);
-            System.out.println("--");
-            for (Node n : open)
-                System.out.println(n.point + " "  + n.calcCost(endPoint));
-
-            open.remove(currentNode);
-            if (currentNode != node){
-                node.parent = currentNode;
-                node.pathCost = node.parent.pathCost + 1;
-                node.visited = true;
-            }
-            currentNode = node;
-
-            if (currentNode.point.equals(endPoint)){
-                return currentNode;
-            }
-
-            for (Node n : getPossibilities(node)){
-                if (!n.visited)
-                    open.add(n);
-            }
-        }
-        throw new RuntimeException("FAILED");
-    }*/
-
     public Node find(MazeSolveView view) {
-        System.out.println(this.endPoint);
+        DebugView.d("Detected endpoint: " + this.endPoint);
         this.currentNode = pointToNode(nodes, mazeToSolve.getStart());
         open.add(this.currentNode);
         while (!open.isEmpty()){
@@ -125,6 +91,7 @@ public class Pathfinder {
             open.remove(node);
             closed.add(node);
             if (node.point.equals(endPoint)){
+                DebugView.d("Path found!");
                 return node;
             }
             for (Node child : getPossibilities(node)){
@@ -143,6 +110,7 @@ public class Pathfinder {
                 }
             }
         }
+        DebugView.d("Failed to generate path. No path to the end exists.");
         throw new RuntimeException("FAILED");
     }
 

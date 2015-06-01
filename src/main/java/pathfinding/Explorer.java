@@ -3,6 +3,7 @@ package pathfinding;
 import pathfinding.util.Direction;
 import pathfinding.util.Point;
 import pathfinding.util.TileState;
+import ui.DebugView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.Stack;
     Random rand;
 
     public Explorer(Maze maze, Maze mazeKey){
+        DebugView.d("Initializing explorer...");
         this.maze = maze;
         this.currentPoint = mazeKey.getStart();
         this.currentDirection = Direction.UP;
@@ -39,6 +41,7 @@ import java.util.Stack;
     }
 
     public void cleanup(){
+        DebugView.d("Cleaning up...");
         for (int x = 0; x < maze.tileMatrix.length; x++)
             for (int y = 0; y < maze.tileMatrix[x].length; y++)
                 if (maze.tileMatrix[x][y].getState() == TileState.OPEN_AND_WAITING)
@@ -79,6 +82,8 @@ import java.util.Stack;
         //Turn the bot if need be and update the current point
         currentDirection = Direction.getDir(currentPoint, chosenPoint);
         currentPoint = chosenPoint;
+
+        DebugView.d("Moved to point: " + currentPoint + ". Now facing " + currentDirection.name());
 
         return true;
     }

@@ -32,6 +32,7 @@ public class SolveThread {
 
         public void run(){
             solveView.path = finder.getPath(solveView);
+            DebugView.d("Path is " + solveView.path.size() + " tiles long.");
         }
 
     }

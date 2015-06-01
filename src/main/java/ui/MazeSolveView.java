@@ -35,6 +35,7 @@ public class MazeSolveView extends JFrame{
             }
         }
 
+        //Initialize draw thread
         Thread t = new Thread(new Runnable() {
             public void run() {
                 while (true){
