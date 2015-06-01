@@ -13,7 +13,7 @@ public class Node {
     }
 
     public double calcCost(Point end){
-        return point.dist(end);
+        return pathCost + point.dist(end);
     }
 
 }

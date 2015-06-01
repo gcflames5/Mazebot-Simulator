@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d84a9652-d373-4125-b10e-b012627baf13" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/ui/DebugView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pathfinding/Explorer.java" afterPath="$PROJECT_DIR$/src/main/java/pathfinding/Explorer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ui/MazeSolveView.java" afterPath="$PROJECT_DIR$/src/main/java/ui/MazeSolveView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Mazebot.java" afterPath="$PROJECT_DIR$/src/main/java/Mazebot.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pathfinding/Pathfinder.java" afterPath="$PROJECT_DIR$/src/main/java/pathfinding/Pathfinder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/ui/SolveThread.java" afterPath="$PROJECT_DIR$/src/main/java/ui/SolveThread.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pathfinding/util/Node.java" afterPath="$PROJECT_DIR$/src/main/java/pathfinding/util/Node.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="mazebot-sim.iws" />
@@ -66,8 +61,21 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/pathfinding/Pathfinder.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="93" column="40" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
+              <caret line="102" column="35" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Node.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pathfinding/util/Node.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.5728643">
+              <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
+              <folding>
+                <element signature="e#325#326#0" expanded="true" />
+                <element signature="e#374#375#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,11 +110,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DebugView.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DebugView.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/ui/DebugView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.81155777">
-              <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#219#227#0" expanded="true" />
@@ -154,6 +162,7 @@
         <option value="$PROJECT_DIR$/src/main/java/pathfinding/Pathfinder.java" />
         <option value="$PROJECT_DIR$/src/main/java/ui/SolveThread.java" />
         <option value="$PROJECT_DIR$/src/main/java/ui/DebugView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pathfinding/util/Node.java" />
       </list>
     </option>
   </component>
@@ -689,14 +698,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pathfinding/Pathfinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="40" selection-start-line="93" selection-start-column="40" selection-end-line="93" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ui/MazeBuildView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -707,13 +708,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ui/DebugView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.81155777">
-          <caret line="19" column="37" selection-start-line="19" selection-start-column="37" selection-end-line="19" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#219#227#0" expanded="true" />
             <element signature="e#875#876#0" expanded="true" />
             <element signature="e#918#919#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pathfinding/Pathfinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="102" column="35" selection-start-line="102" selection-start-column="35" selection-end-line="102" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pathfinding/util/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5728643">
+          <caret line="15" column="42" selection-start-line="15" selection-start-column="42" selection-end-line="15" selection-end-column="42" />
+          <folding>
+            <element signature="e#325#326#0" expanded="true" />
+            <element signature="e#374#375#0" expanded="true" />
           </folding>
         </state>
       </provider>
