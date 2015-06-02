@@ -11,13 +11,11 @@ public class PathfinderThread {
     MazeSolveView solveView;
     Thread thread;
     Maze keyMaze;
-    long stepTime;
 
-    public PathfinderThread(JComboBox delayList, MazeSolveView solveView, Maze keyMaze, long stepTime){
+    public PathfinderThread(JComboBox delayList, MazeSolveView solveView, Maze keyMaze){
         this.delayList = delayList;
         this.solveView = solveView;
         this.keyMaze = keyMaze;
-        this.stepTime = stepTime;
 
         thread = new Thread(new PathfinderRunnable());
     }
@@ -39,12 +37,11 @@ public class PathfinderThread {
                     e.printStackTrace();
                 }
             }
-            //explorer.cleanup();
-            SolveThread sThread = new SolveThread(delayList, solveView, keyMaze, stepTime);
+            explorer.cleanup();
+            SolveThread sThread = new SolveThread(delayList, keyMaze);
             sThread.thread.start();
         }
 
     }
-
 
 }

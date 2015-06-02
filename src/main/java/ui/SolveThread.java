@@ -2,22 +2,20 @@ package ui;
 
 import pathfinding.Maze;
 import pathfinding.Pathfinder;
+import pathfinding.util.Node;
 
 import javax.swing.*;
+import java.util.List;
 
 public class SolveThread {
 
     JComboBox delayList;
-    MazeSolveView solveView;
     Thread thread;
     Maze keyMaze;
-    long stepTime;
 
-    public SolveThread(JComboBox delayList, MazeSolveView solveView, Maze keyMaze, long stepTime){
+    public SolveThread(JComboBox delayList, Maze keyMaze){
         this.delayList = delayList;
-        this.solveView = solveView;
         this.keyMaze = keyMaze;
-        this.stepTime = stepTime;
 
         thread = new Thread(new SolveRunnable());
     }
@@ -27,12 +25,12 @@ public class SolveThread {
         Pathfinder finder;
 
         public SolveRunnable(){
-            finder = new Pathfinder(delayList, keyMaze);
+            finder = new Pathfinder(keyMaze.getStart(), keyMaze.getEnd(), keyMaze, delayList);
         }
 
         public void run(){
-            solveView.path = finder.getPath(solveView);
-            DebugView.d("Path is " + solveView.path.size() + " tiles long.");
+            List<Node> finalPath = finder.getPath();
+            DebugView.d("Path is " + finalPath.size() + " tiles long.");
         }
 
     }

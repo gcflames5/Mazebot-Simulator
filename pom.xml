@@ -8,6 +8,14 @@
     <artifactId>mazebot-sim</artifactId>
     <version>1.0-snapshot</version>
 
+    <dependencies>
+        <dependency>
+            <groupId>net.njay</groupId>
+            <artifactId>CustomEvents</artifactId>
+            <version>1.0.2</version>
+        </dependency>
+    </dependencies>
+
     <build>
         <finalName>mazebot-sim</finalName>
         <plugins>

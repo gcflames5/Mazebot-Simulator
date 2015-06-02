@@ -1,6 +1,7 @@
 package ui;
 
 import pathfinding.Maze;
+import pathfinding.util.Node;
 import pathfinding.util.TileState;
 import ui.util.PlaceMode;
 
@@ -9,6 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
+import java.util.ArrayList;
 
 public class MazeController extends JFrame implements ActionListener{
 
@@ -16,7 +18,7 @@ public class MazeController extends JFrame implements ActionListener{
     MazeSolveView solveView;
     PathfinderThread pfthreadHandler;
 
-    public JComboBox stepDelayList;
+    public static JComboBox stepDelayList;
 
     public MazeController(MazeBuildView buildView, MazeSolveView solveView){
         this.buildView = buildView;
@@ -62,7 +64,7 @@ public class MazeController extends JFrame implements ActionListener{
         JLabel stepLabel = new JLabel("   |   Step Delay");
         pane.add(stepLabel);
 
-        stepDelayList = new JComboBox(new String[] { "1", "5", "50", "100", "150", "250", "500", "1000" });
+        stepDelayList = new JComboBox(new String[] { "0", "1", "5", "50", "100", "150", "250", "500", "1000" });
         stepDelayList.setSelectedIndex(3);
         pane.add(stepDelayList);
 
@@ -90,10 +92,12 @@ public class MazeController extends JFrame implements ActionListener{
             if (action.equalsIgnoreCase("begin")){
                 solveView.setVisible(true);
                 buildView.setVisible(false);
-                this.pfthreadHandler = new PathfinderThread(stepDelayList, solveView, buildView.maze, 250);
+                this.pfthreadHandler = new PathfinderThread(stepDelayList, solveView, buildView.maze);
                 this.pfthreadHandler.thread.start();
             }else if (action.equalsIgnoreCase("stop")){
-                this.pfthreadHandler.thread.stop();
+                if (this.pfthreadHandler.thread != null)
+                    this.pfthreadHandler.thread.stop();
+                solveView.path = new ArrayList<Node>();
                 buildView.setVisible(true);
                 solveView.setVisible(false);
             }else if (action.equalsIgnoreCase("all_clear")){

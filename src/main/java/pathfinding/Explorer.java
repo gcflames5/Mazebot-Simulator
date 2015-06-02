@@ -1,9 +1,13 @@
 package pathfinding;
 
+import event.Event;
+import event.PathUpdateEvent;
 import pathfinding.util.Direction;
+import pathfinding.util.Node;
 import pathfinding.util.Point;
 import pathfinding.util.TileState;
 import ui.DebugView;
+import ui.MazeController;
 
 import java.util.*;
 
@@ -67,6 +71,8 @@ public class Explorer {
             }
             possiblePoints.add(missedOppertunities.pop());
             currentDirection = missedOppertunitiesDir.pop();
+            new Pathfinder(currentPoint, possiblePoints.get(0), maze, MazeController.stepDelayList).find();
+            Event.callEvent(new PathUpdateEvent(null));
         }
 
         //Choose a new Point to move to and take other possibilities and put them in missedOppertunities

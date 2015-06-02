@@ -1,5 +1,7 @@
 package pathfinding;
 
+import event.Event;
+import event.PathUpdateEvent;
 import pathfinding.util.Direction;
 import pathfinding.util.Node;
 import pathfinding.util.Point;
@@ -15,13 +17,13 @@ public class Pathfinder {
 
     Maze mazeToSolve;
     Node currentNode;
-    Point endPoint;
+    Point startPoint, endPoint;
 
     private List<Node> nodes, open, closed;
 
     JComboBox delay;
 
-    public Pathfinder(JComboBox delay, Maze mazeToSolve){
+    public Pathfinder(Point start, Point end, Maze mazeToSolve, JComboBox delay){
         DebugView.d("Initializing pathfinder...");
         this.delay = delay;
 
@@ -37,18 +39,20 @@ public class Pathfinder {
 
         this.mazeToSolve = mazeToSolve;
 
-        this.endPoint = mazeToSolve.getEnd();
+        this.startPoint = start;
+        this.endPoint = end;
     }
 
     //Use Best-first search algorithm and pseudo priority queue to get best path
-    public List<Node> getPath(MazeSolveView view){
-        return makePath(find(view));
+    public List<Node> getPath(){
+        return makePath(find());
     }
 
     public List<Node> makePath(Node end){
         List<Node> nodes = new ArrayList<Node>();
         Node currentNode = end;
-        while (currentNode.parent != null){
+        while (!nodes.contains(currentNode) && currentNode.parent != null){
+            DebugView.d(currentNode.parent.toString());
             nodes.add(currentNode);
             currentNode = currentNode.parent;
         }
@@ -62,10 +66,7 @@ public class Pathfinder {
             if (newPoint.x < 0 || newPoint.x >= mazeToSolve.tileMatrix.length
                     || newPoint.y < 0 || newPoint.y >= mazeToSolve.tileMatrix.length)
                 continue;
-            if (mazeToSolve.getTile(newPoint).getState() == TileState.OPEN
-                    || mazeToSolve.getTile(newPoint).getState() == TileState.OPEN_AND_EXPLORED
-                    || mazeToSolve.getTile(newPoint).getState() == TileState.OPEN_AND_WAITING
-                    || mazeToSolve.getTile(newPoint).getState() == TileState.END){
+            if (mazeToSolve.getTile(newPoint).getState() != TileState.OBSTRUCTED){
                 Node node = pointToNode(nodes, newPoint);
                 if (node != null && !node.visited)
                     possibilities.add(node);
@@ -75,9 +76,9 @@ public class Pathfinder {
         return possibilities;
     }
 
-    public Node find(MazeSolveView view) {
-        DebugView.d("Detected endpoint: " + this.endPoint);
-        this.currentNode = pointToNode(nodes, mazeToSolve.getStart());
+    public Node find() {
+        DebugView.d("Routing path from: " + this.startPoint + " to " + this.endPoint);
+        this.currentNode = pointToNode(nodes, startPoint);
         open.add(this.currentNode);
         while (!open.isEmpty()){
             try {
@@ -86,7 +87,7 @@ public class Pathfinder {
                 e.printStackTrace();
             }
             Node node = getClosestToGoal(open);
-            view.path = makePath(node);
+            Event.callEvent(new PathUpdateEvent(makePath(node)));
             open.remove(node);
             closed.add(node);
             if (node.point.equals(endPoint)){

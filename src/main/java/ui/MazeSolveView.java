@@ -1,5 +1,8 @@
 package ui;
 
+import event.EventHandler;
+import event.Listener;
+import event.PathUpdateEvent;
 import pathfinding.Maze;
 import pathfinding.util.Node;
 import pathfinding.util.Point;
@@ -11,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MazeSolveView extends JFrame{
+public class MazeSolveView extends JFrame implements Listener{
 
     Maze maze;
     Map<JButton, Point> buttonMap;
@@ -52,16 +55,17 @@ public class MazeSolveView extends JFrame{
         for (Map.Entry<JButton, Point> entry : buttonMap.entrySet()) {
             entry.getKey().setBackground(maze.getTile(entry.getValue()).getState().color);
             if (path != null){
-                /*for (int i = 0; i < path.size(); i++){
-                    if (entry.getValue().equals(path.get(i).point))
-                        entry.getKey().setBackground(Color.MAGENTA);
-                }*/
                 for (Node n : path){
                     if (entry.getValue().equals(n.point))
                         entry.getKey().setBackground(Color.MAGENTA);
                 }
             }
         }
+    }
+
+    @EventHandler
+    public void onPathUpdate(PathUpdateEvent e){
+        this.path = e.getPath();
     }
 
 }

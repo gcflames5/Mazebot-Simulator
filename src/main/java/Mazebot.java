@@ -1,3 +1,4 @@
+import event.Event;
 import ui.DebugView;
 import ui.MazeBuildView;
 import ui.MazeController;
@@ -20,6 +21,7 @@ public class Mazebot {
         gt.setVisible(true);
 
         MazeSolveView sv = new MazeSolveView(15, 15);
+        Event.addListener(sv);
         sv.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         sv.pack();
         sv.setLocationRelativeTo(null);
