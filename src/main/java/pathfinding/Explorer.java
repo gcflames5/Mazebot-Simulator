@@ -39,8 +39,10 @@ public class Explorer {
 
     public boolean step(){
         checkVisibleDirections();
-        if (!move())
+        if (!move()){
+            DebugView.d("Can't move, terminating explore!");
             return false;
+        }
         return true;
     }
 

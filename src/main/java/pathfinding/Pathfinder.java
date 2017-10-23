@@ -52,7 +52,6 @@ public class Pathfinder {
         List<Node> nodes = new ArrayList<Node>();
         Node currentNode = end;
         while (!nodes.contains(currentNode) && currentNode.parent != null){
-            DebugView.d(currentNode.parent.toString());
             nodes.add(currentNode);
             currentNode = currentNode.parent;
         }

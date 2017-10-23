@@ -2,6 +2,7 @@ package pathfinding;
 
 import pathfinding.util.Point;
 import pathfinding.util.TileState;
+import ui.DebugView;
 
 import java.io.Serializable;
 
@@ -35,8 +36,10 @@ public class Maze implements Serializable{
     public Point getStart(){
         for (int x = 0; x < tileMatrix.length; x++)
             for (int y = 0; y < tileMatrix[x].length; y++) {
-                if (tileMatrix[x][y].getState() == TileState.START)
+                if (tileMatrix[x][y].getState() == TileState.START){
+                    DebugView.d("Found " + x + "  " + y);
                     return new Point(x, y);
+                }
             }
         return null;
     }
